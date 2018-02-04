@@ -65,7 +65,7 @@ public class ShapeCollectorTestSuite {
     }
 
     @Test
-    public void testShowShapes() {
+    public void testShowFigures() {
         //Given
         ArrayList<String> listOfFigures = new ArrayList<String>();
         Circle shape = new Circle(5.0);
