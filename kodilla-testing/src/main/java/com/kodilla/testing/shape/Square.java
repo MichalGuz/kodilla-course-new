@@ -2,11 +2,9 @@ package com.kodilla.testing.shape;
 
 public class Square implements Shape {
     private double a;
-    private double b;
 
-    public Square(double a, double b) {
+    public Square(double a) {
         this.a = a;
-        this.b = b;
     }
 
     @Override
@@ -16,14 +14,13 @@ public class Square implements Shape {
 
     @Override
     public double getArea() {
-        return a * b;
+        return a * a;
     }
 
     @Override
     public String toString() {
         return "Square{" +
                 "a=" + a +
-                ", b=" + b +
                 '}';
     }
 }
