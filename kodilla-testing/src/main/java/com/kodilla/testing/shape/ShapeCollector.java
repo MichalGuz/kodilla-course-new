@@ -3,22 +3,39 @@ package com.kodilla.testing.shape;
 import java.util.ArrayList;
 
 public class ShapeCollector {
-    public ArrayList<String> listOfFigures = new ArrayList<String>();
+
+    private ArrayList<Shape> listOfFigures;
+    private ArrayList<Shape> secondListOfFigures;
+
+    public ShapeCollector() {
+        listOfFigures = new ArrayList<>();
+        secondListOfFigures = new ArrayList<>();
+    }
 
     public void addFigure(Shape shape) {
-        //        temporarily empty
+       listOfFigures.add(shape);
+    }
+
+    public void addFigureToSecond(Shape shape) {
+        secondListOfFigures.add(shape);
     }
 
     public void removeFigure(Shape shape) {
-        //        temporarily empty
+        listOfFigures.remove(shape);
     }
 
-    public void getFigure(int n) {
-        //       temporarily empty
+    public Shape getFigure(int n) {
+        return listOfFigures.get(n);
     }
 
-   public String showFigures() {
-       //        temporarily return something
-       return "figure";
+   public void showFigures() {
+       for(Shape shape: listOfFigures){
+           System.out.println(shape);
+           System.out.println("Area: " + shape.getArea());
+       }
+    }
+
+    public int getSize(){
+        return listOfFigures.size();
     }
 }

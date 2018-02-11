@@ -16,4 +16,11 @@ public class Circle implements Shape {
     public double getArea() {
         return Math.PI * Math.pow(r,2);
     }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "r=" + r +
+                '}';
+    }
 }

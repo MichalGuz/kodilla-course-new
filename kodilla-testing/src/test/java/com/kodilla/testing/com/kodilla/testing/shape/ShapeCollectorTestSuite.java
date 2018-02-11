@@ -1,10 +1,9 @@
 package com.kodilla.testing.com.kodilla.testing.shape;
 
 import com.kodilla.testing.shape.Circle;
-import com.kodilla.testing.shape.Triangle;
+import com.kodilla.testing.shape.Shape;
+import com.kodilla.testing.shape.ShapeCollector;
 import org.junit.*;
-
-import java.util.ArrayList;
 
 public class ShapeCollectorTestSuite {
 
@@ -26,64 +25,45 @@ public class ShapeCollectorTestSuite {
     @Test
     public void testAddFigure() {
         //Given
-        ArrayList<String>  listOfFigures = new ArrayList<String>();
+        Shape circle = new Circle(5.0);
+        ShapeCollector sc = new ShapeCollector();
 
         //When
-        listOfFigures.add("Circle");
+        sc.addFigure(circle);
 
         //Then
-        Assert.assertEquals(1, listOfFigures.size());
+        Shape result = sc.getFigure(0);
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void testRemoveFigure() {
         //Given
-        ArrayList<String> listOfFigures = new ArrayList<String>();
-        listOfFigures.add("Circle");
+        Shape circle = new Circle(5.0);
+        ShapeCollector sc = new ShapeCollector();
+        sc.addFigure(circle);
 
         //When
-       boolean result = listOfFigures.remove("Circle");
+        sc.removeFigure(circle);
 
         //Then
-        Assert.assertTrue(result);
-        Assert.assertEquals(0, listOfFigures.size());
+        int size = sc.getSize();
+        Assert.assertEquals(0,size);
     }
 
     @Test
     public void testGetFigure() {
         //Given
-        ArrayList<String> listOfFigures = new ArrayList<String>();
-        Circle shape = new Circle(5.0);
-        listOfFigures.add("Circle");
+        Shape circle = new Circle(5.0);
+        ShapeCollector sc = new ShapeCollector();
+        sc.addFigure(circle);
 
         //When
-        String retrievedFigure;
-        retrievedFigure = listOfFigures.get(0);
+        Shape other;
+        other = sc.getFigure(0);
 
         //Then
-        Assert.assertEquals(shape, retrievedFigure);
+        Assert.assertEquals(circle, other);
     }
 
-    @Test
-    public void testShowFigures() {
-        //Given
-        ArrayList<String> listOfFigures = new ArrayList<String>();
-        Circle shape = new Circle(5.0);
-        Triangle shape1 = new Triangle(4.0, 3.0);
-        listOfFigures.add("Circle");
-        listOfFigures.add("Triangle");
-        String showFigures = null;
-        for(int n=0; n < listOfFigures.size(); n++) {
-            showFigures = (listOfFigures.get(n));
-        }
-
-        //When
-        String result = null;
-        for(int n=0; n < listOfFigures.size(); n++) {
-            result = (listOfFigures.get(n));
-        }
-
-        //Then
-        Assert.assertEquals(showFigures, result);
-    }
 }

@@ -18,4 +18,12 @@ public class Triangle implements Shape {
     public double getArea() {
         return (c * h) / 2 ;
     }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "c=" + c +
+                ", h=" + h +
+                '}';
+    }
 }

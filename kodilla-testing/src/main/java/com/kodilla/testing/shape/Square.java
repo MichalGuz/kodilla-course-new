@@ -18,4 +18,12 @@ public class Square implements Shape {
     public double getArea() {
         return a * b;
     }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "a=" + a +
+                ", b=" + b +
+                '}';
+    }
 }
