@@ -35,7 +35,7 @@ public class ShapeCollector {
        }
     }
 
-    public int getSize(){
+    public int getSize() {
         return listOfFigures.size();
     }
 }
