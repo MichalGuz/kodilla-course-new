@@ -2,24 +2,14 @@ package com.kodilla.testing.forum.statistics;
 
 public class ForumStatistics {
 
-    Statistics statistics;
+    public Statistics statistics;
 
-    /* public ForumStatistics(Statistics statistics) {
-        this.statistics = statistics;
-    }
-
-    public Statistics getStatistics() {
-        return statistics;
-    }
-
-   */
-
-    int quantityOfUsers;
-    int quantityOfPosts;
-    int quantityOfComments;
-    double avgUsersPosts;
-    double avgUsersComments;
-    double avgCommentsPerPost;
+    private int quantityOfUsers;
+    private int quantityOfPosts;
+    private int quantityOfComments;
+    private double avgUsersPosts;
+    private double avgUsersComments;
+    private double avgCommentsPerPost;
 
     public ForumStatistics(Statistics statistics) {
         this.statistics = statistics;
