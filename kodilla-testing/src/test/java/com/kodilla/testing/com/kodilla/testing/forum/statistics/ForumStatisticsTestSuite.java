@@ -152,7 +152,7 @@ public class ForumStatisticsTestSuite {
         // Given
         Statistics statisticsMock = mock(Statistics.class);
         ArrayList<String> userNames = new ArrayList<String>();
-        for(int i=0; i<9; i++){
+        for(int i=0; i<99; i++){
             String name = "name" + i;
             userNames.add(name);
         }
