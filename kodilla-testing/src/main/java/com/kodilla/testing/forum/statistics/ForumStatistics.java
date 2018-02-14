@@ -66,9 +66,18 @@ public class ForumStatistics {
         quantityOfUsers = statistics.usersNames().size();
         quantityOfPosts = statistics.postsCount();
         quantityOfComments = statistics.commentsCount();
-        avgUsersPosts = quantityOfPosts / quantityOfUsers;
-        avgUsersComments = quantityOfComments / quantityOfUsers;
-        avgCommentsPerPost = quantityOfComments / quantityOfPosts;
+        if (quantityOfUsers == 0) {
+            avgUsersPosts = 0;
+            avgUsersComments = 0;
+        } else {
+            avgUsersPosts = quantityOfPosts / quantityOfUsers;
+            avgUsersComments = quantityOfComments / quantityOfUsers;
+        }
+        if (quantityOfPosts == 0) {
+            avgCommentsPerPost = 0;
+        } else {
+            avgCommentsPerPost = quantityOfComments / quantityOfPosts;
+        }
     }
 
     public void ShowStatistics() {
