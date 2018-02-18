@@ -1,28 +1,30 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.ExpressionExecutor;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
-        // example 7.1
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
+        Forum forumSelect = new Forum();
+        LocalDate over20 = LocalDate.of(1998,2,17);
 
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
+        Map<Integer, ForumUser> selection = forumSelect.getUserList().stream()
+                .filter(forumUser -> forumUser.getSexUser() == 'M')
+                //odfiltruje tylko tych użytkowników, którzy mają co najmniej 20 lat
+                .filter(forumUser -> forumUser.getBirthDate().isBefore(over20))
+                // odfiltruje tylko tych użytkowników, którzy mają co najmniej jeden opublikowany post
+                .filter(forumUser -> forumUser.getPostsNumber() > 0)
+                //przy pomocy kolektora utworzy mapę par, w której rolę klucza będzie pełnił unikalny identyfikator użytkownika
+                //wyświetli otrzymaną mapę wynikową
+                .collect(Collectors.toMap(ForumUser::getForumUserID,ForumUser -> ForumUser));
 
-        // task 7.1
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-
-        poemBeautifier.beautify("sample text", (text) -> "ABC" + text + "ABC");
-        poemBeautifier.beautify("sample text", (text) -> text.toUpperCase());
-        poemBeautifier.beautify("sample text", (text) -> text + text);
-        poemBeautifier.beautify("sample text", (text) -> text.substring(6) + " " + text);
-
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
+        System.out.println("Numbers elements of list \"Selection\": " + selection.size());
+            selection.entrySet().stream()
+                .map(entry -> entry.getKey() + " - " + entry.getValue())
+                .forEach(System.out::println);
     }
 }
