@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 public class StreamMain {
     public static void main(String[] args) {
         Forum forumSelect = new Forum();
-        LocalDate over20 = LocalDate.of(1998,2,17);
+        LocalDate overTwenty = LocalDate.now().minusYears(20);
 
         Map<Integer, ForumUser> selection = forumSelect.getUserList().stream()
                 .filter(forumUser -> forumUser.getSexUser() == 'M')
                 //odfiltruje tylko tych użytkowników, którzy mają co najmniej 20 lat
-                .filter(forumUser -> forumUser.getBirthDate().isBefore(over20))
+                .filter(forumUser -> forumUser.getBirthDate().isBefore(overTwenty))
                 // odfiltruje tylko tych użytkowników, którzy mają co najmniej jeden opublikowany post
                 .filter(forumUser -> forumUser.getPostsNumber() > 0)
                 //przy pomocy kolektora utworzy mapę par, w której rolę klucza będzie pełnił unikalny identyfikator użytkownika
