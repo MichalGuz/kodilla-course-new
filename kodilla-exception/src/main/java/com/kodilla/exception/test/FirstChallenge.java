@@ -4,20 +4,6 @@ public class FirstChallenge {
 
     public double divide(double a, double b) {
 
-        try {
-
-            return a / b;
-
-
-        } catch (ArithmeticException e) {
-
-            System.out.println("Caution! Something went wrong!" + e);
-
-        } finally {
-
-            System.out.println("Remember! If you divide a number by 0, your result will be equals infinity ;)");
-        }
-
         return a / b;
     }
 
@@ -25,9 +11,20 @@ public class FirstChallenge {
 
         FirstChallenge firstChallenge = new FirstChallenge();
 
-        double result = firstChallenge.divide(3, 0);
+        double result = firstChallenge.divide(3, 1);
 
-        System.out.println(result);
+        try {
+
+            System.out.println(result);
+
+        } catch (ArithmeticException e) {
+
+            System.out.println("exeption" + e);
+
+        } finally {
+
+            System.out.println("Remember! If you divide a number by 0, your result will be equals infinity ;)");
+        }
 
     }
 }
