@@ -146,21 +146,14 @@ public class BoardTestSuite {
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        long longDays = project.getTaskLists().stream()
+        Double average = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
                 .map(l -> LocalDate.now().toEpochDay() - l.getCreated().toEpochDay())
                 .mapToInt(n -> n.intValue())
-                .sum();
-
-        long longTasks = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl -> tl.getTasks().stream())
-                .count();
-
-        long average = longDays/longTasks;
+                .average().orElse(0);
 
         //Then
-        Assert.assertEquals(10, average);
+        Assert.assertEquals(10, average, 0);
     }
 }
