@@ -8,7 +8,7 @@ public class FlightApp {
 
         FlightFinder searching = new FlightFinder();
         Map<Flight, String> result = searching.getFlightsThrough("Wroclaw","Gdansk");
-        System.out.println(result.entrySet().toString());
+        System.out.println(result);
     }
 
 

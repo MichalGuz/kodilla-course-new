@@ -2,7 +2,6 @@ package com.kodilla.good.patterns.flight.searching;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class FlightFinder {
@@ -32,13 +31,12 @@ public class FlightFinder {
             flights.put(flightI, "morning");
 
             Map<Flight,String> result1 = flights.entrySet().stream()
-                    .map(f -> f.getKey())
-                    .filter(fl -> fl.getVia().equals(via))
-                    .collect(Collectors.toMap(f -> f, flights.values()));
+                    .filter(fl -> fl.getKey().getVia().equals(via))
+                    .collect(Collectors.toMap(fl -> fl.getKey(), fl -> flights.get(fl.getValue())));
 
             Map<Flight, String> result2 = flights.entrySet().stream()
                     .filter(fl -> fl.getKey().getTo().equals(to))
-                    .collect(Collectors.toMap(fl -> fl, flights.values()));
+                    .collect(Collectors.toMap(fl -> fl.getKey(), fl -> flights.get(fl.getKey())));
 
             result1.putAll(result2);
             return result1;
