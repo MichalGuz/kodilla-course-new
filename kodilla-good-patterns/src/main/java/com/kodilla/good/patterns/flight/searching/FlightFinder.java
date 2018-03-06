@@ -31,12 +31,13 @@ public class FlightFinder {
             flights.put(flightI, "morning");
 
             Map<Flight,String> result1 = flights.entrySet().stream()
-                    .filter(fl -> fl.getKey().getVia().equals(via))
-                    .collect(Collectors.toMap(fl -> fl.getKey(), fl -> flights.get(fl.getValue())));
+                    .map(f -> f.getKey())
+                    .filter(fl -> fl.getVia().equals(via))
+                    .collect(Collectors.toMap(f -> f, f -> flights.get(f)));
 
             Map<Flight, String> result2 = flights.entrySet().stream()
                     .filter(fl -> fl.getKey().getTo().equals(to))
-                    .collect(Collectors.toMap(fl -> fl.getKey(), fl -> flights.get(fl.getKey())));
+                    .collect(Collectors.toMap(fl -> fl.getKey(), fl -> fl.getValue()));
 
             result1.putAll(result2);
             return result1;
