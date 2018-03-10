@@ -16,7 +16,7 @@ public class ExtraFoodShop implements Producer {
 
     @Override
     public boolean process (User user, Product product, OrderData orderData){
-        System.out.println("Extra Food Shop! \n Extra food in regular price!\n)");
+        System.out.println("\nExtra Food Shop! \nExtra food in regular price!\n");
         Random random = new Random();
         return random.nextBoolean();
     }
