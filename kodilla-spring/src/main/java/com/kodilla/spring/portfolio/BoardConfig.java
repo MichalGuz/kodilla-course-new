@@ -1,24 +1,34 @@
 package com.kodilla.spring.portfolio;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BoardConfig {
 
-    @Bean
+    @Autowired
+    private TaskList toDoList;
+
+    @Autowired
+    private TaskList inProgressList;
+
+    @Autowired
+    private TaskList doneList;
+
+    @Bean(name="toDoList")
     public TaskList toDoList() {
-        return new TaskList();
+        return toDoList;
     }
 
-    @Bean
+    @Bean(name="inProgressList")
     public TaskList inProgressList() {
-        return new TaskList();
+        return inProgressList;
     }
 
-    @Bean
+    @Bean(name="doneList")
     public TaskList doneList() {
-        return new TaskList();
+        return doneList;
     }
 
     @Bean

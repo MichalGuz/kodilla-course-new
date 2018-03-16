@@ -21,8 +21,8 @@ public class BoardTestSuite {
         //When
         boolean boardExists = context.containsBean("board");
         boolean toDoListExists = context.containsBean("toDoList");
-        boolean inProgressListExists = context.containsBean("toDoList");
-        boolean doneListExists = context.containsBean("toDoList");
+        boolean inProgressListExists = context.containsBean("inProgressList");
+        boolean doneListExists = context.containsBean("doneList");
         //Then
         System.out.println("Bean board was found in the container: " + boardExists);
         System.out.println("Bean toDoList was found in the container: " + toDoListExists);
@@ -61,5 +61,4 @@ public class BoardTestSuite {
         //Then
         System.out.println(check1.get(0) + "\n" + check2.get(0) + "\n" + check3.get(0));
     }
-
 }
