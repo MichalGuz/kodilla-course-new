@@ -17,10 +17,6 @@ import java.math.BigDecimal;
 public class InvoiceDaoTestSuite {
     @Autowired
     InvoiceDao invoiceDao;
-    @Autowired
-    ItemDao itemDao;
-    @Autowired
-    ProductDao productDao;
 
     @Test
     public void testInvoiceDaoSave(){
