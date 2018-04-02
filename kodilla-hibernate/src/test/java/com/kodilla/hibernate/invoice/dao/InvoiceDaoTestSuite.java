@@ -17,6 +17,10 @@ import java.math.BigDecimal;
 public class InvoiceDaoTestSuite {
     @Autowired
     InvoiceDao invoiceDao;
+    @Autowired
+    ProductDao productDao;
+    @Autowired
+    ItemDao itemDao;
 
     @Test
     public void testInvoiceDaoSave(){
@@ -29,7 +33,8 @@ public class InvoiceDaoTestSuite {
         Item item2 = new Item(new BigDecimal(69.99), 1, new BigDecimal(69.99));
         Item item3 = new Item(new BigDecimal(9.99), 5, new BigDecimal(49.95));
 
-        Invoice invoice = new Invoice("0000/ExampleInvoice");
+        String number = "0003/ExampleInvoice";
+        Invoice invoice = new Invoice(number);
         invoice.getItems().add(item1);
         invoice.getItems().add(item2);
         invoice.getItems().add(item3);
@@ -48,9 +53,21 @@ public class InvoiceDaoTestSuite {
 
         //When
         invoiceDao.save(invoice);
+        productDao.save(product1);
+        productDao.save(product2);
+        productDao.save(product3);
+        itemDao.save(item1);
+        itemDao.save(item2);
+        itemDao.save(item3);
         int invoiceId = invoice.getId();
+        int retrievedId = invoiceDao.findFirstByNumber(number).getId();
 
         //Then
-        Assert.assertEquals(1, invoiceId);
+        Assert.assertEquals(invoiceId, retrievedId);
+
+        //
+        itemDao.deleteAll();
+        productDao.deleteAll();
+        invoiceDao.deleteAll();
     }
 }

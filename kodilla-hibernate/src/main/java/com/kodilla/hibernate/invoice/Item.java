@@ -63,7 +63,7 @@ public class Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "PRODUCTS")
     public Product getProduct() {
         return product;
     }
@@ -73,7 +73,7 @@ public class Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "INVOICE_ID")
+    @JoinColumn(name = "INVOICES")
     public Invoice getInvoice() {
         return invoice;
     }

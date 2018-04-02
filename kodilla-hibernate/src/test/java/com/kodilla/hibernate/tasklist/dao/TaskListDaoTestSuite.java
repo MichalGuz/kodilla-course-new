@@ -19,10 +19,11 @@ import java.util.List;
 public class TaskListDaoTestSuite {
     @Autowired
     private TaskListDao taskListDao;
-    private static final String DESCRIPTION = "some descritpion";
-    private static final String LISTNAME = "some name";
     @Autowired
     private TaskDao taskDao;
+    private static final String DESCRIPTION = "some descritpion";
+    private static final String LISTNAME = "some name";
+
     @Test
     public void testFindByListName() {
         //Given
@@ -103,7 +104,7 @@ public class TaskListDaoTestSuite {
         List<Task> longTasks = taskDao.retrieveLongTasks();
         List<Task> shortTasks = taskDao.retrieveShortTasks();
         List<Task> enoughTimeTasks = taskDao.retrieveTasksWithEnoughTime();
-        List<Task> durationLongerThanTasks = taskDao.retrieveTasksWithDurationLongerThan(6);
+        List<Task> durationLongerThanTasks = taskDao.retrieveTasksWithDurationLongerThan(5);
 
         //Then
         try {
@@ -113,7 +114,7 @@ public class TaskListDaoTestSuite {
             Assert.assertEquals(3, durationLongerThanTasks.size());
         } finally {
             //CleanUp
-            taskListDao.delete(id);
+            taskListDao.deleteAll();
         }
     }
 }
