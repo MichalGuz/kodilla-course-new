@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+    @Autowired
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany(){
@@ -51,13 +55,62 @@ public class CompanyDaoTestSuite {
         Assert.assertNotEquals(0, dataMaestersId);
         Assert.assertNotEquals(0, greyMatterId);
 
+
         //CleanUp
-        //try {
-        //    companyDao.delete(softwareMachineId);
-        //    companyDao.delete(dataMaestersId);
-        //    companyDao.delete(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.delete(softwareMachineId);
+            companyDao.delete(dataMaestersId);
+            companyDao.delete(greyMatterId);
+            employeeDao.deleteAll();
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    public void testRetrieveEmployeeByLastName() {
+        //Given
+        Employee adamJohnson = new Employee("Adam", "Johnson");
+        Employee brendaJohnson = new Employee("Brenda", "Johnson");
+        Employee ianParker = new Employee("Ian", "Parker");
+        Employee alexisJohnson = new Employee("Alexis", "Johnson");
+
+        Company secretLab = new Company("Secret Lab");
+        Company greenCity = new Company("Green City");
+
+        secretLab.getEmployees().add(adamJohnson);
+        greenCity.getEmployees().add(brendaJohnson);
+        greenCity.getEmployees().add(adamJohnson);
+        secretLab.getEmployees().add(ianParker);
+        greenCity.getEmployees().add(alexisJohnson);
+
+        adamJohnson.getCompanies().add(secretLab);
+        brendaJohnson.getCompanies().add(greenCity);
+        adamJohnson.getCompanies().add(greenCity);
+        ianParker.getCompanies().add(secretLab);
+        alexisJohnson.getCompanies().add(greenCity);
+
+        companyDao.save(secretLab);
+        companyDao.save(greenCity);
+
+        //When
+        List<Employee> findLastName = employeeDao.retrieveEmployeeByLastName("Johnson");
+        List<Company> findCompany = companyDao.retrieveCompanyByFirst3Characters("Gre");
+
+        //Then
+        Assert.assertEquals(3, findLastName.size());
+        Assert.assertEquals(1, findCompany.size());
+
+        //CleanUp
+        try {
+            employeeDao.delete(adamJohnson);
+            employeeDao.delete(alexisJohnson);
+            employeeDao.delete(brendaJohnson);
+            employeeDao.delete(ianParker);
+            companyDao.delete(greenCity);
+            companyDao.delete(secretLab);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 }

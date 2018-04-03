@@ -5,6 +5,13 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Company.retrieveCompanyByFirst3Characters",
+        query = "SELECT * FROM companies " +
+                "GROUP BY company_id " +
+                "HAVING SUBSTRING(company_name, 1, 3) = :FIRST_3_CHAR",
+        resultClass = Company.class
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
